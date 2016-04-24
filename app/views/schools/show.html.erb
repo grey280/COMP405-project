@@ -4,6 +4,7 @@
   <strong>Name:</strong>
   <%= @school.name %>
 </p>
+<%= render @school.users %>
 
 <%= link_to 'Edit', edit_school_path(@school) %> |
 <%= link_to 'Back', schools_path %>
