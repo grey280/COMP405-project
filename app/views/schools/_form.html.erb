@@ -1,6 +1,6 @@
 <%= form_for(@school) do |f| %>
   <% if @school.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-warning">
       <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
 
       <ul>
@@ -11,11 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions form-group">
+    <%= f.submit 'Save', class: "btn btn-default" %>
   </div>
 <% end %>
