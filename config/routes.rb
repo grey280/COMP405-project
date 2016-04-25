@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :posts
   resources :schools
-  devise_for :users
+  devise_for :users, path: 'accounts', controllers: { registrations: 'registrations' }
   resources :users
   
 

@@ -21,6 +21,32 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :firstName %><br>
+    <%= f.text_field :firstName %>
+  </div>
+  <div class="field">
+    <%= f.label :lastName %><br>
+    <%= f.text_field :lastName %>
+  </div>
+  <div class="field">
+    <%= f.label :nickName %><br>
+    <%= f.text_field :nickName %>
+  </div>
+  <div class="field">
+    <%= f.label :school %><br>
+    <% school_array = School.all.map { |school| [school.name, school.id] } %>
+    <%= select_tag :school_id, options_for_select(school_array) %>
+  </div>
+  <div class="field">
+    <%= f.label :job %><br>
+    <%= f.text_field :job %>
+  </div>
+  <div class="field">
+    <%= f.label :birthdate %><br>
+    <%= f.date_select :birthdate %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
