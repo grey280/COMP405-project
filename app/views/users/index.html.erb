@@ -8,20 +8,16 @@
             <th>Nickname</th>
             <th>School</th>
             <th>Job</th>
-            <th colspan="3"></th>
           </tr>
         </thead>
 
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= user.firstName %> <%= user.lastName %></td>
+              <td><%= link_to "#{user.firstName} #{user.lastName}", user %></td>
               <td><%= user.nickName %></td>
               <td><%= School.find(user.school_id).name %></td>
               <td><%= user.job %></td>
-              <td><%= link_to 'Show', user %></td>
-              <td><%= link_to 'Edit', edit_user_path(user) %></td>
-              <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>
