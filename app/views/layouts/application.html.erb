@@ -32,18 +32,30 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="<%= 'active' if params[:controller] == 'schools' %>"><%= link_to 'Schools', schools_path %></li>
-        <li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to 'Users', users_path %></li>
+        <li class="<%= 'active' if (params[:controller] == 'users' && !user_signed_in?) || (params[:controller] == 'users' && params[:id].to_f != current_user.id) %>"><%= link_to 'Users', users_path %></li>
         <li class="<%= 'active' if params[:controller] == 'posts' %>"><%= link_to 'Posts', posts_path %></li>
         <li class="<%= 'active' if params[:controller] == 'comments' %>"><%= link_to 'Comments', comments_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-        <li><%= #current_user.nickName 
-                link_to current_user.nickName, user_path(current_user) %></li>
-        <li><%= link_to 'Sign out', destroy_user_session_path, method: "delete" %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Debug <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-header"><%= debug(params) %></li>
+            </ul>
+          </li>
+
+          <li class="dropdown <%= 'active' if params[:controller] == 'users' && params[:id].to_f == current_user.id %>">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.nickName %> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="<%= 'active' if params[:controller] == 'users' && params[:action] == 'show' && params[:id].to_f == current_user.id %>"><%= link_to 'View Account', user_path(current_user) %></li>
+              <li class="<%= 'active' if params[:controller] == 'users' && params[:action] == 'edit' && params[:id].to_f == current_user.id %>"><%= link_to 'Edit Account', edit_user_path(current_user) %></li>
+              <li><%= link_to 'Sign out', destroy_user_session_path, method: "delete" %></li>
+            </ul>
+          </li>
         <% else %>
-        <li><%= link_to 'Sign in', new_user_session_path %></li>
-        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          <li class="<%= 'active' if params[:controller] == 'devise/sessions' %>"><%= link_to 'Sign in', new_user_session_path %></li>
+          <li class="<%= 'active' if params[:controller] == 'registrations' %>"><%= link_to 'Sign up', new_user_registration_path %></li>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
