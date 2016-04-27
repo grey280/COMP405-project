@@ -39,9 +39,9 @@
     <%= f.text_field :nickName %>
   </div>
   <div class="field">
-    <%= f.label :school %><br>
+    <%= f.label :school_id %><br>
     <% school_array = School.all.map { |school| [school.name, school.id] } %>
-    <%= select_tag :school_id, options_for_select(school_array) %>
+    <%= f.select :school_id, school_array %>
   </div>
   <div class="field">
     <%= f.label :job %><br>

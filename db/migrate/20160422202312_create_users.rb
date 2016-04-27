@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :firstName
       t.string :lastName
       t.string :nickName
-      t.string :school
       t.string :job
       t.date :birthdate
 

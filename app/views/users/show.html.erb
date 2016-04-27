@@ -17,7 +17,7 @@
 
 <p>
   <strong>School:</strong>
-  <%= @user.school %>
+  <%= School.find(@user.school_id).name %>
 </p>
 
 <p>

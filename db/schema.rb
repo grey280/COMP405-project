@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20160424160512) do
     t.string   "firstName"
     t.string   "lastName"
     t.string   "nickName"
-    t.string   "school"
     t.string   "job"
     t.date     "birthdate"
     t.datetime "created_at",                          null: false
