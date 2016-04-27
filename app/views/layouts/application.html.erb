@@ -44,7 +44,6 @@
               <li class="dropdown-header"><%= debug(params) %></li>
             </ul>
           </li>
-
           <li class="dropdown <%= 'active' if params[:controller] == 'users' && params[:id].to_f == current_user.id %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.nickName %> <span class="caret"></span></a>
             <ul class="dropdown-menu">
