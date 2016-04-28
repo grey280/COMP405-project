@@ -11,18 +11,14 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th></th>
+            <th>Students</th>
           </tr>
         </thead>
         <tbody>
           <% @schools.each do |school| %>
             <tr>
-              <td><%= school.name %></td>
-              <td><div class="btn-group">
-                <%= link_to 'Show', school, class: "btn btn-default" %>
-                <%= link_to 'Edit', edit_school_path(school), class: "btn btn-warning" %>
-                <%= link_to 'Destroy', school, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-              </div></td>
+              <td><%= link_to school.name, school %></td>
+              <td><%= school.users.count %></td>
             </tr>
           <% end %>
         </tbody>

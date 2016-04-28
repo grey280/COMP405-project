@@ -1,5 +1,5 @@
 <tr>
-  <td><%= user.firstName %> <%= user.lastName %></td>
-  <td><%= user.nickName %></td>
-  <td><%= user.job %></td>
+	<td><%= link_to "#{user.firstName} #{user.lastName}", user %></td>
+	<td><%= user.nickName %></td>
+  	<td><%= user.job %></td>
 </tr>
