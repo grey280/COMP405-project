@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :home
   resources :comments
   resources :posts
   resources :schools
@@ -6,7 +7,10 @@ Rails.application.routes.draw do
   resources :users
   
 
-  root 'schools#index'
+  get 'users/follow/:id', to: 'users#follow', as: 'follow_user'
+  delete 'users/follow/:id', to: 'users#unfollow', as: 'unfollow_user'
+
+  root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

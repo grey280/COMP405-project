@@ -61,6 +61,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+    @fUser = User.find(params[:id])
+    if user_signed_in?
+      if current_user == @fUser
+        redirect_to @fUser, notice: "You can't follow yourself!"
+      else
+        current_user.follow(@fUser)
+        redirect_to @fUser, notice: "Followed #{@fUser.nickName}."
+      end
+    else
+      redirect_to @fUser, notice: "You need to be signed in for that."
+    end
+  end
+
+  def unfollow
+    if user_signed_in?
+      @fUser = User.find(params[:id])
+      current_user.stop_following(@fUser)
+      redirect_to @fUser, notice: "Unfollowed #{@fUser.nickName}"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

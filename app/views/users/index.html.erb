@@ -6,6 +6,7 @@
           <tr>
             <th>Name</th>
             <th>Nickname</th>
+            <th>Followers</th>
             <th>School</th>
             <th>Job</th>
           </tr>
@@ -16,6 +17,7 @@
             <tr>
               <td><%= link_to "#{user.firstName} #{user.lastName}", user %></td>
               <td><%= user.nickName %></td>
+              <td><%= user.followers_count %></td>
               <td><%= School.find(user.school_id).name %></td>
               <td><%= user.job %></td>
             </tr>
