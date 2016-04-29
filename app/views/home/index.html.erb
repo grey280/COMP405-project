@@ -3,19 +3,8 @@
     	<p id="notice" class="alert alert-info"><%= notice %></p>
   	<% end %>
 	<div class="row">
-		<div class="col-md-6">
-			<h1>Follows <span class="badge"><%= current_user.all_follows.count %></span></h1>
-			<%= debug(current_user.all_follows) %>
-		</div>
-		<div class="col-md-6">
-			<h1>Followers <span class="badge"><%= current_user.followers_count %></span></h1>
-			<%= debug(current_user.followers) %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<h1>Current User Object</h1>
-			<%= debug(current_user) %>
+		<div class="column-md-12">
+			<%= render partial: "posts/homepage_post", collection: @posts %>
 		</div>
 	</div>
 </div>
