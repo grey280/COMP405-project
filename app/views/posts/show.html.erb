@@ -30,9 +30,9 @@
   				<% else %>
   					<%= link_to 'Like', '#', class: "btn btn-default navbar-btn" %>
   					<% if current_user.following?(@post.user) %>
-			          <%= link_to "Unfollow #{@post.user.nickName}", unfollow_user_path(@post.user), method: "delete", class: "btn btn-default" %>
+			          <%= link_to "Unfollow #{@post.user.nickName}", unfollow_user_path(@post.user), method: "delete", class: "btn btn-default navbar-btn" %>
 			        <% else %>
-			          <%= link_to "Follow #{@post.user.nickName}", follow_user_path(@post.user), class: "btn btn-default" %>
+			          <%= link_to "Follow #{@post.user.nickName}", follow_user_path(@post.user), class: "btn btn-default navbar-btn" %>
 			        <% end %>
   				<% end %>
   			<% end %>
