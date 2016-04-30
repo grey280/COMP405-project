@@ -62,13 +62,14 @@ class UsersController < ApplicationController
   end
 
   def follow
+    session[:return_to] ||= request.referrer
     @fUser = User.find(params[:id])
     if user_signed_in?
       if current_user == @fUser
         redirect_to @fUser, notice: "You can't follow yourself!"
       else
         current_user.follow(@fUser)
-        redirect_to @fUser, notice: "Followed #{@fUser.nickName}."
+        redirect_to session.delete(:return_to), notice: "Followed #{@fUser.nickName}."
       end
     else
       redirect_to @fUser, notice: "You need to be signed in for that."
@@ -76,10 +77,11 @@ class UsersController < ApplicationController
   end
 
   def unfollow
+    session[:return_to] ||= request.referrer
     if user_signed_in?
       @fUser = User.find(params[:id])
       current_user.stop_following(@fUser)
-      redirect_to @fUser, notice: "Unfollowed #{@fUser.nickName}"
+      redirect_to session.delete(:return_to), notice: "Unfollowed #{@fUser.nickName}"
     end
   end
 
