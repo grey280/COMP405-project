@@ -53,6 +53,29 @@ class PostsController < ApplicationController
     end
   end
 
+  def like
+    session[:return_to] ||= request.referrer
+    if user_signed_in?
+      @post = Post.find(params[:id])
+      @post.liked_by current_user
+      redirect_to session.delete(:return_to), notice: "Liked post with ID #{@post.id}"
+    else
+      redirect_to session.delete(:return_to), notice: "You need to be signed in for that!"
+    end
+  end
+
+  def unlike
+    session[:return_to] ||= request.referrer
+    if user_signed_in?
+      @post = Post.find(params[:id])
+      @post.unliked_by current_user
+      redirect_to session.delete(:return_to), notice: "Unliked post with ID #{@post.id}"
+    else
+      redirect_to session.delete(:return_to), notice: "You need to be signed in for that!"
+    end
+  end
+
+
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy

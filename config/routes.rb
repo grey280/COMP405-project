@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get 'users/follow/:id', to: 'users#follow', as: 'follow_user'
   delete 'users/follow/:id', to: 'users#unfollow', as: 'unfollow_user'
 
+  post 'post/like/:id', to: 'posts#like', as: 'like_post'
+  delete 'post/like/:id', to:'posts#unlike', as:'unlike_post'
+
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
