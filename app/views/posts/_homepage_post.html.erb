@@ -1,4 +1,4 @@
-
-
+<% localUser = User.find(homepage_post.user_id) %>
 <h2><%= link_to homepage_post.title, homepage_post %></h2>
+<span><%= link_to localUser.nickName, localUser %></span>
 <p><%= homepage_post.content %></p>
