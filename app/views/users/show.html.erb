@@ -3,39 +3,27 @@
     <p id="notice" class="alert alert-info"><%= notice %></p>
   <% end %>
   <div class="row">
-    <div class="col-md-4">
-      <div class="user-scrollfix" data-spy="affix" data-offset-top="60">
+    <div class="col-md-3">
+      <div class="text-right">
         <h1><%= @user.firstName %> <%= @user.lastName %></h1>
         <p>"<%= @user.nickName %>"</p>
-        <p><%= pluralize(@user.followers_count, 'follower') %></p>
+        <% if user_signed_in? %>
+          <% if current_user.following?(@user) %>
+            <%= link_to pluralize(@user.followers_count, 'follower'), unfollow_user_path(@user), method: "delete", class: "btn btn-default navbar-btn active" %>
+          <% else %>
+            <%= link_to pluralize(@user.followers_count, 'follower'), follow_user_path(@user), class: "btn btn-default navbar-btn" %>
+          <% end %>
+        <% else %>
+          <p><%= pluralize(@user.followers_count, 'follower') %></p>
+        <% end %>
         <h2>About</h2>
         <p><strong>School</strong> <%= School.find(@user.school_id).name %></p>
         <p><strong>Job</strong> <%= @user.job %></p>
         <p><strong>Birthday</strong> <%= @user.birthdate %></p>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-9">
       <%= render @user.posts.reverse %>
     </div>
   </div>
 </div>
-
-<% if user_signed_in? %>
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container">
-    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bottomnav-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="bottomnav-collapse">
-        <% if current_user.following?(@user) %>
-          <%= link_to 'Unfollow', unfollow_user_path(@user), method: "delete", class: "btn btn-default navbar-btn" %>
-        <% else %>
-          <%= link_to 'Follow', follow_user_path(@user), class: "btn btn-default navbar-btn" %>
-        <% end %>
-    </div>
-  </div>
-</nav>
-<% end %>

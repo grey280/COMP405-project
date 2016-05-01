@@ -18,15 +18,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.text-right h1{
+	margin-top: 5px;
+}
+
 .field_with_errors {
   @extend .has-error
 }
 
 body{
 	padding-bottom:50px;
-}
-.user-scrollfix{
-	top:10px
 }
 .panel-heading.clearfix{
 	h1{
@@ -38,3 +39,5 @@ body{
 		margin-left:10px;
 	}
 }
+
+

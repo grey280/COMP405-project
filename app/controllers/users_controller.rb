@@ -72,6 +72,7 @@ class UsersController < ApplicationController
         redirect_to session.delete(:return_to), notice: "Followed #{@fUser.nickName}."
       end
     else
+      session.delete(:return_to)
       redirect_to @fUser, notice: "You need to be signed in for that."
     end
   end
@@ -83,6 +84,7 @@ class UsersController < ApplicationController
       current_user.stop_following(@fUser)
       redirect_to session.delete(:return_to), notice: "Unfollowed #{@fUser.nickName}"
     end
+    session.delete(:return_to)
   end
 
   private
