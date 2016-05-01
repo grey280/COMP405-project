@@ -3,23 +3,29 @@
 	<div class="panel-heading clearfix">
 		<div class="btn-group pull-right">
 			<% if user_signed_in? %>
-	          <% if current_user.following?(localUser) %>
-	            <%= link_to pluralize(localUser.followers_count, 'follower'), unfollow_user_path(localUser), method: "delete", class: "btn btn-default navbar-btn active" %>
-	          <% else %>
-	            <%= link_to pluralize(localUser.followers_count, 'follower'), follow_user_path(localUser), class: "btn btn-default navbar-btn" %>
-	          <% end %>
-	          <% if !current_user.voted_for? homepage_post %>
-			      <%= link_to pluralize(homepage_post.votes_for.size, "like"), like_post_path(homepage_post), method:"post", class: "btn btn-default navbar-btn" %>
-			    <% else %>
-			      <%= link_to pluralize(homepage_post.votes_for.size, "like"), unlike_post_path(homepage_post), method:"delete", class: "btn btn-default navbar-btn active" %>
-			    <% end %>
-	        <% else %>
-	          <a class="btn btn-default navbar-btn" disabled><%= pluralize(localUser.followers_count, 'follower') %></a>
-	          <a class="btn btn-default navbar-btn" disabled><%= pluralize(homepage_post.votes_for.size, "like") %></a>
-	        <% end %>
+				<% if current_user == localUser %>
+					<%= link_to "Edit Post", edit_post_path(homepage_post), class: "btn btn-warning navbar-btn" %>
+					<%= link_to "Delete Post", homepage_post, method: "delete", confirm: "Are you sure you want to delete this post?", class: "btn btn-danger navbar-btn" %>
+
+				<% else %>
+					<% if current_user.following?(localUser) %>
+						<%= link_to pluralize(localUser.followers_count, 'follower'), unfollow_user_path(localUser), method: "delete", class: "btn btn-default navbar-btn active" %>
+					<% else %>
+						<%= link_to pluralize(localUser.followers_count, 'follower'), follow_user_path(localUser), class: "btn btn-default navbar-btn" %>
+					<% end %>
+					<% if !current_user.voted_for? homepage_post %>
+						<%= link_to pluralize(homepage_post.votes_for.size, "like"), like_post_path(homepage_post), method:"post", class: "btn btn-default navbar-btn" %>
+					<% else %>
+						<%= link_to pluralize(homepage_post.votes_for.size, "like"), unlike_post_path(homepage_post), method:"delete", class: "btn btn-default navbar-btn active" %>
+					<% end %>
+				<% end %>
+			<% else %>
+				<a class="btn btn-default navbar-btn" disabled><%= pluralize(localUser.followers_count, 'follower') %></a>
+				<a class="btn btn-default navbar-btn" disabled><%= pluralize(homepage_post.votes_for.size, "like") %></a>
+			<% end %>
 		</div>
-	    <h1 class="panel-title"><%= link_to homepage_post.title, homepage_post %></h1>
-	    <span class="username">by <%= link_to localUser.nickName, localUser %></span>
+		<h1 class="panel-title"><%= link_to homepage_post.title, homepage_post %></h1>
+		<span class="username">by <%= link_to localUser.nickName, localUser %></span>
 	</div>
 	<div class="panel-body">
 		<%= homepage_post.content %>
@@ -27,7 +33,7 @@
 	<div class="list-group">
 		<%= render homepage_post.comments %>
 	</div>
-		<div class="panel-footer">
-			<%= render 'comments/form', comment: Comment.new(post_id: homepage_post.id) %>
-		</div>
+	<div class="panel-footer">
+		<%= render 'comments/form', comment: Comment.new(post_id: homepage_post.id) %>
+	</div>
 </div>
