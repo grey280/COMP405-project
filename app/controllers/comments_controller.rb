@@ -25,10 +25,16 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
+    session[:return_to] ||= request.referrer
+    if user_signed_in?
+      @comment.user_id = current_user.id
+    else
+      redirect_to session.delete(:return_to), notice: "You need to be signed in for that!"
+    end
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Comment posted.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }

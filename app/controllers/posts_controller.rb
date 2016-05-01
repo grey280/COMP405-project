@@ -58,7 +58,7 @@ class PostsController < ApplicationController
     if user_signed_in?
       @post = Post.find(params[:id])
       @post.liked_by current_user
-      redirect_to session.delete(:return_to), notice: "Liked post with ID #{@post.id}"
+      redirect_to session.delete(:return_to)
     else
       redirect_to session.delete(:return_to), notice: "You need to be signed in for that!"
     end
@@ -69,7 +69,7 @@ class PostsController < ApplicationController
     if user_signed_in?
       @post = Post.find(params[:id])
       @post.unliked_by current_user
-      redirect_to session.delete(:return_to), notice: "Unliked post with ID #{@post.id}"
+      redirect_to session.delete(:return_to)
     else
       redirect_to session.delete(:return_to), notice: "You need to be signed in for that!"
     end

@@ -1,4 +1,28 @@
 <% localUser = User.find(homepage_post.user_id) %>
-<h2><%= link_to homepage_post.title, homepage_post %></h2>
-<span><%= link_to localUser.nickName, localUser %></span>
-<p><%= homepage_post.content %></p>
+<div class="panel panel-info">
+	<div class="panel-heading clearfix">
+		<div class="btn-group pull-right">
+			<% if current_user.following?(localUser) %>
+	          <%= link_to 'Follow', unfollow_user_path(localUser), method: "delete", class: "btn btn-default navbar-btn active" %>
+	        <% else %>
+	          <%= link_to 'Follow', follow_user_path(localUser), class: "btn btn-default navbar-btn" %>
+	        <% end %>
+			<% if !current_user.voted_for? homepage_post %>
+		      <%= link_to pluralize(homepage_post.votes_for.size, "like"), like_post_path(homepage_post), method:"post", class: "btn btn-default navbar-btn" %>
+		    <% else %>
+		      <%= link_to pluralize(homepage_post.votes_for.size, "like"), unlike_post_path(homepage_post), method:"delete", class: "btn btn-default navbar-btn active" %>
+		    <% end %>
+		</div>
+	    <h1 class="panel-title"><%= link_to homepage_post.title, homepage_post %></h1>
+	    <span class="username">by <%= link_to localUser.nickName, localUser %></span>
+	</div>
+	<div class="panel-body">
+		<%= homepage_post.content %>
+	</div>
+	<div class="list-group">
+		<%= render homepage_post.comments %>
+	</div>
+		<div class="panel-footer">
+			<%= render 'comments/form', comment: Comment.new(post_id: homepage_post.id) %>
+		</div>
+</div>

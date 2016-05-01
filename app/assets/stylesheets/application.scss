@@ -28,3 +28,13 @@ body{
 .user-scrollfix{
 	top:10px
 }
+.panel-heading.clearfix{
+	h1{
+		margin-top:5px;
+		margin-bottom:5px;
+		font-size:1.5em;
+	}
+	span.username{
+		margin-left:10px;
+	}
+}
