@@ -43,12 +43,14 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li class="<%= 'active' if params[:controller] == 'posts' && params[:action] == 'new' %>"><%= link_to 'New Post', new_post_path %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Debug <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-header"><%= debug(params) %></li>
-            </ul>
-          </li>
+          <% if session[:debug] == true %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Debug <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header"><%= debug(params) %></li>
+              </ul>
+            </li>
+          <% end %>
           <li class="dropdown <%= 'active' if params[:controller] == 'users' && params[:id].to_f == current_user.id %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.nickName %> <span class="caret"></span></a>
             <ul class="dropdown-menu">
