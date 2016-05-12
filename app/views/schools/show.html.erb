@@ -2,10 +2,12 @@
 	<div class="row">
 		<div class="col-md-10"><h1><%= @school.name %></h1></div>
 		<div class="col-md-2">
-			<div class="btn-group-vertical">
-				<%= link_to 'Edit', edit_school_path(@school), class: "btn btn-warning btn-block" %>
-				<%= link_to 'Destroy', @school, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-block" %>
-			</div>
+			<% if user_signed_in? %>
+				<div class="btn-group-vertical">
+					<%= link_to 'Edit', edit_school_path(@school), class: "btn btn-warning btn-block" %>
+					<%= link_to 'Destroy', @school, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-block" %>
+				</div>
+			<% end %>
 		</div>
 	</div>
 	<div class="row">

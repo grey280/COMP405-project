@@ -19,7 +19,9 @@
 	<div class="list-group">
 		<%= render post.comments %>
 	</div>
-		<div class="panel-footer">
-			<%= render 'comments/form', comment: Comment.new(post_id: post.id) %>
-		</div>
+		<% if user_signed_in?%>
+			<div class="panel-footer">
+				<%= render 'comments/form', comment: Comment.new(post_id: post.id) %>
+			</div>
+		<% end %>
 </div>
