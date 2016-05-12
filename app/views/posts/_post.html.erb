@@ -1,13 +1,15 @@
 <% localUser = User.find(post.user_id) %>
 <div class="panel panel-info">
 	<div class="panel-heading clearfix">
-		<div class="btn-group pull-right">
-			<% if !current_user.voted_for? post %>
-		      <%= link_to pluralize(post.votes_for.size, "like"), like_post_path(post), method:"post", class: "btn btn-default navbar-btn" %>
-		    <% else %>
-		      <%= link_to pluralize(post.votes_for.size, "like"), unlike_post_path(post), method:"delete", class: "btn btn-default navbar-btn active" %>
-		    <% end %>
-		</div>
+		<% if user_signed_in? %>
+			<div class="btn-group pull-right">
+				<% if !current_user.voted_for? post %>
+			      <%= link_to pluralize(post.votes_for.size, "like"), like_post_path(post), method:"post", class: "btn btn-default navbar-btn" %>
+			    <% else %>
+			      <%= link_to pluralize(post.votes_for.size, "like"), unlike_post_path(post), method:"delete", class: "btn btn-default navbar-btn active" %>
+			    <% end %>
+			</div>
+		<% end %>
 	    <h1 class="panel-title"><%= link_to post.title, post %></h1>
 	    <span class="username">by <%= link_to localUser.nickName, localUser %></span>
 	</div>
